@@ -22,8 +22,12 @@ app.config.from_object(Config)
 
 def get_locale():
     """
-    Get the best match for supported languages
+    Get locale from URL parameter if present,
+    otherwise use the best match from headers
     """
+    locale = request.args.get('locale')
+    if locale in app.config['LANGUAGES']:
+        return locale
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
@@ -35,7 +39,7 @@ def main_page():
     """
     Main page of the app
     """
-    return render_template('3-index.html'), 200
+    return render_template('4-index.html'), 200
 
 
 if __name__ == '__main__':
