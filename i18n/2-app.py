@@ -5,9 +5,6 @@ Flask i18n app
 from flask import Flask, render_template, request
 from flask_babel import Babel
 
-app = Flask(__name__)
-babel = Babel(app)
-
 
 class Config(object):
     """
@@ -18,15 +15,18 @@ class Config(object):
     BABEL_DEFAULT_TIMEZONE = 'UTC'
 
 
+app = Flask(__name__)
 app.config.from_object(Config)
 
 
-@babel.localeselector
 def get_locale():
     """
     Get the best match for supported languages
     """
-    return request.accept_languages.best_match(Config.LANGUAGES)
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
+
+
+babel = Babel(app, locale_selector=get_locale)
 
 
 @app.route('/')
