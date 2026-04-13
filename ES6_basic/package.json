@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "lint": "eslint 0-constants.js --no-config-lookup",
+    "test": "jest --passWithNoTests"
+  },
   "devDependencies": {
     "@babel/core": "^7.29.0",
     "@babel/preset-env": "^7.29.2",
