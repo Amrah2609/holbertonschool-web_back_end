@@ -21,7 +21,6 @@ class Config(object):
 app.config.from_object(Config)
 
 
-
 @app.route('/')
 def main_page():
     """
